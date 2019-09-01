@@ -1,0 +1,122 @@
+<div class="row">
+    <div class="col-lg-12">
+      <div class="card">
+          <div class="card-body">
+            <div class="container-fluid" style="margin-top:20px">
+                <div class="row">
+                    <div class="col-md-12">
+                    <div class="tree" >
+                        <ul style="display: flex">
+                        <li style="margin: auto">
+                            <button class="btn btn-secondary btn-outline bootstrap-touchspin-up btn-arrow" (click)="addSponsor(_userService.user, '0')"><i class="fa fa-arrow-left"></i></button>
+                            <a (click)="getAffiliates(pyramid.size, pyramid.DNI, 2)" >
+                            <div class="container-fluid" >
+                                <div class="row"> {{pyramid.DNI}}</div>
+                                <div class="row" style="margin-top: 25px; margin-left: 30px"><i class="fa fa-address-book-o fa-2x"></i></div>
+                                <div class="row">{{pyramid.name}} {{pyramid.lastname}}</div>
+                            </div>
+                            </a>
+                            <button class="btn btn-secondary btn-outline bootstrap-touchspin-up btn-arrow" (click)="addSponsor(_userService.user, '1')"><i class="fa fa-arrow-right"></i></button>
+                            <ul *ngIf="pyramid.size">
+                            <li *ngFor="let afiliado1 of pyramid.afiliados; let i = index">
+                                <button class="btn btn-secondary btn-outline bootstrap-touchspin-up btn-arrow" (click)="addSponsor(afiliado1, '0')"><i class="fa fa-arrow-left"></i></button>
+                                <a (click)="getAffiliates(afiliado1.size, afiliado1.DNI, 3, i)">
+                                <div class="container-fluid">
+                                    <div class="row">{{afiliado1.DNI}}</div>
+                                    <div class="row" style="margin-top: 25px; margin-left: 30px"><i class="fa fa-address-book-o fa-2x"></i></div>
+                                    <div class="row">{{afiliado1.name}} {{afiliado1.lastname}}</div>
+                                </div>
+                                </a>
+                                <button class="btn btn-secondary btn-outline bootstrap-touchspin-up btn-arrow" (click)="addSponsor(afiliado1, '1')"><i class="fa fa-arrow-right"></i></button>
+                                <ul *ngIf="afiliado1.size">
+                                <li *ngFor="let afiliado2 of afiliado1.afiliados; let j = index">
+                                    <button class="btn btn-secondary btn-outline bootstrap-touchspin-up btn-arrow" (click)="addSponsor(afiliado2, '0')"><i class="fa fa-arrow-left"></i></button>
+                                    <a (click)="getAffiliates(afiliado2.size, afiliado2.DNI, 4, i, j)">
+                                    <div class="container-fluid">
+                                        <div class="row">{{afiliado2.DNI}}</div>
+                                        <div class="row" style="margin-top: 25px; margin-left: 30px"><i class="fa fa-address-book-o fa-2x"></i></div>
+                                        <div class="row">{{afiliado2.name}} {{afiliado2.lastname}}</div>
+                                    </div>
+                                    </a>
+                                    <button class="btn btn-secondary btn-outline bootstrap-touchspin-up btn-arrow" (click)="addSponsor(afiliado2, '1')"><i class="fa fa-arrow-right"></i></button>
+                                    <ul *ngIf="afiliado2.size">
+                                    <li *ngFor="let afiliado3 of afiliado2.afiliados">
+                                        <a>
+                                        <div class="container-fluid">
+                                            <div class="row">{{afiliado3.DNI}}</div>
+                                            <div class="row" style="margin-top: 25px; margin-left: 30px"><i class="fa fa-address-book-o fa-2x"></i></div>
+                                            <div class="row">{{afiliado3.name}} {{afiliado3.lastname}}</div>
+                                        </div>
+                                        </a>
+                                    </li>
+                                    </ul>
+                                </li>
+                                </ul>
+                            </li>
+                            </ul>
+                        </li>
+                        </ul>
+                    </div>
+                    </div>
+                </div>
+            </div>      
+          </div>
+      </div>
+  </div>
+</div>
+
+  <div class="fondo-negro animated slideInDown" [ngClass]="_modalService.oculto">
+            <div class="modal" style="display: block" tabindex="-1" role="dialog">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Nuevo Afiliado</h5>
+                        <button type="button" class="close" (click)="_modalService.ocultarModal()" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body">
+                          <div class="card">
+                              <div class="card-body">
+                                  <h6 class="card-subtitle">Registrar</h6>
+                                  <form ngNativeValidate [formGroup]= "forma" class="form p-t-20" >
+                                      <div class="form-group">
+                                          <label for="exampleInputuname">Dirección de Correo Electrónico</label>
+                                          <div class="input-group">
+                                              <div class="input-group-addon"><i class="ti-user"></i></div>
+                                              <input type="email" formControlName="email" name="email" required class="form-control" id="exampleInputuname" placeholder="Correo electrónico">
+                                          </div>
+                                      </div>
+                                      <div class="form-group">
+                                          <label for="exampleInputuname">Patrocinador</label>
+                                          <div class="input-group">
+                                              <div class="input-group-addon"><i class="fa fa-address-card"></i></div>
+                                              <input type="text" formControlName="sponsor" name="sponsor" required class="form-control" id="exampleInputuname" placeholder="DNI del patrocinador">
+                                          </div>
+                                      </div>
+                                      <div class="form-group">
+                                              <label for="exampleInputuname">Brazo</label>
+                                              <div class="radio-list">
+                                                  <label class="custom-control custom-radio">
+                                                      <input id="radio3" formControlName="arm" name="arm" value="0" required type="radio" checked="" class="custom-control-input">
+                                                      <span class="custom-control-indicator"></span>
+                                                      <span class="custom-control-description">Izquierda</span>
+                                                  </label>
+                                                  <label class="custom-control custom-radio">
+                                                      <input id="radio4" formControlName="arm" name="arm" value="1" required type="radio" class="custom-control-input">
+                                                      <span class="custom-control-indicator"></span>
+                                                      <span class="custom-control-description">Derecha</span>
+                                                  </label>
+                                              </div>
+                                          </div>
+                                      <button (click)="registerAffiliate()" class="btn btn-success btn-block waves-effect waves-light m-r-10">
+                                          <i class="fa fa-save"></i>
+                                          Registrar Afiliado</button>
+                                  </form>
+                              </div>
+                          </div>
+                      </div>
+                </div>
+              </div>
+            </div>
+          </div>

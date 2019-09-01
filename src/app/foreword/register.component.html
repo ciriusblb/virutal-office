@@ -1,0 +1,84 @@
+  <!-- ============================================================== -->
+    <!-- Main wrapper - style you can find in pages.scss -->
+    <!-- ============================================================== -->
+    <section id="wrapper" class="login-register login-sidebar" style="background-image:url(../assets/images/background/foreword.jpg);">
+      <div class="login-box card">
+          <div class="card-body">
+              <form ngNativeValidate [formGroup]= "form" (ngSubmit)="registerUser()" class="form-horizontal form-material" id="loginform" >
+                  <a href="javascript:void(0)" class="text-center db">
+                    <img src="../assets/images/VirtualOff.png" width="108px" height="23px" alt="Home" /></a>
+                  <h3 class="box-title m-t-10 m-b-0">Regístrate Ahora</h3>
+                  <div class="row m-t-20">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <input formControlName="name" name="name" class="form-control" type="text" required placeholder="Nombre">
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <input formControlName="lastname" name="lastname" class="form-control" type="text" required placeholder="Apellidos">
+                        </div>
+                    </div>  
+                  </div>
+                  <div class="form-group ">
+                      <div class="col-xs-12">
+                          <input formControlName="email" name="email" class="form-control" type="email" required placeholder="Correo">
+                      </div>
+                  </div>
+                  <div class="form-group ">
+                      <div class="col-xs-12">
+                          <input formControlName="password" name="password" class="form-control" type="password" required placeholder="Contraseña">
+                      </div>
+                  </div>
+                  <div class="form-group">
+                      <div class="col-xs-12">
+                          <input formControlName="password2" name="password2" class="form-control" type="password" required placeholder="Confirma Contraseña">
+                      </div>
+                  </div>
+                  <div class="form-group" *ngIf="form.errors && !form.pristine">
+                        <p class=text-danger>
+                            Las contraseñas deben ser iguales
+                        </p>
+                    </div>
+                  <div class="form-group">
+                      <div class="col-xs-12">
+                          <input formControlName="phoneNumber" name="phoneNumber" class="form-control" type="text" required placeholder="Número de teléfono">
+                      </div>
+                   </div>
+                   <div class="row m-t-20">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <input formControlName="DNI" name="DNI" class="form-control" type="number" required placeholder="DNI">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <input formControlName="sponsor" name="sponsor" class="form-control" type="number" required placeholder="DNI del Patrocinador">                                
+                            </div>
+                        </div>  
+                      </div>
+                  <div class="form-group row">
+                      <div class="col-md-12">
+                          <div class="checkbox checkbox-primary p-t-0">
+                              <input formControlName="terms" name="terms" id="checkbox-signup" type="checkbox">
+                              <label for="checkbox-signup"> Estoy de acuerdo con los <a href="#">Terminos</a></label>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="form-group text-center ">
+                      <div class="col-xs-12">
+                          <button class="btn btn-info btn-lg btn-block text-uppercase waves-effect waves-light" type="submit">Registrarme</button>
+                      </div>
+                  </div>
+                  <div class="form-group m-b-0">
+                      <div class="col-sm-12 text-center">
+                          <p>¿Tienes una cuenta? <a routerLink="/login" class="text-info m-l-5"><b>Ingresa Ahora</b></a></p>
+                      </div>
+                  </div>
+              </form>
+          </div>
+      </div>
+  </section>
+  <!-- ============================================================== -->
+  <!-- End Wrapper -->
+  <!-- ============================================================== -->

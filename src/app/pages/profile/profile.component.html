@@ -1,0 +1,157 @@
+                <!-- ============================================================== -->
+                <!-- Start Page Content -->
+                <!-- ============================================================== -->
+                <!-- Row -->
+                <div class="row animated fadeIn">
+                    <!-- Column -->
+                    <div class="col-lg-4 col-xlg-3 col-md-5">
+                        <div class="card">
+                            <div class="card-body" align="center">
+                                <div class="m-t-30 center"> <img src="{{user.photoURL}}"  class="img-circle " width="150" />
+                                    <h4 class="card-title m-t-10">{{user.name}} {{user.lastname}}</h4>
+                                    <h6 class="card-subtitle">{{user.rank}}</h6>
+                                
+                                </div>
+                            </div>
+                            <div>
+                                <hr> </div>
+                            <div class="card-body"> <small class="text-muted">Dirección de correo electrónico </small>
+                                <h6>{{user.email}}</h6> <small class="text-muted p-t-30 db">Teléfono</small>
+                                <h6>{{user.phoneNumber}}</h6> <small class="text-muted p-t-30 db">Dirección</small>
+                                <h6>{{user.address}}</h6>
+                                <br/>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Column -->
+                    <!-- Column -->
+                    <div class="col-lg-8 col-xlg-9 col-md-7">
+                        <div class="card">
+                            <!-- Nav tabs -->
+                            <ul class="nav nav-tabs profile-tab" role="tablist">
+                                <li class="nav-item"> <a class="nav-link active" data-toggle="tab" href="#profile" role="tab">Perfil</a> </li>
+                                <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#settings" role="tab">Ajustes</a> </li>
+                            </ul>
+                            <!-- Tab panes -->
+                            <div class="tab-content">
+                                <div class="tab-pane active" id="profile" role="tabpanel">
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-md-4 col-xs-12 b-r"> <strong>Nombres y Apellidos</strong>
+                                                <br>
+                                                <p class="text-muted">{{user.name}} {{user.lastname}}</p>
+                                            </div>
+                                            <div class="col-md-4 col-xs-12 b-r"> <strong>Móvil</strong>
+                                                <br>
+                                                <p class="text-muted">{{user.phoneNumber}}</p>
+                                            </div>
+                                            <div class="col-md-4 col-xs-12"> <strong>Correo Electrónico</strong>
+                                                <br>
+                                                <p class="text-muted">{{user.email}}</p>
+                                            </div>
+                                        </div>
+                                        <hr>
+                                        <h4 class="font-medium m-t-30">Niveles propuestos</h4>
+                                        <hr>
+                                        <div *ngFor="let level of levels">
+                                            <h5 class="m-t-30">{{level.rank}} <span class="pull-right">{{level.complete}}%</span></h5>
+                                            <div class="progress">
+                                                <div class="progress-bar" [ngClass]="level.bgClass" role="progressbar" [attr.ariaValuenow]="level.complete" aria-valuemin="0" aria-valuemax="100" [style.width]="level.complete +'%'" style="height:6px;"> 
+                                                    <span class="sr-only">{{level.complete}}% Complete</span> 
+                                                </div>
+                                            </div>
+                                        </div> 
+                                    </div>
+                                </div>
+                                <div class="tab-pane" id="settings" role="tabpanel">
+                                    <div class="card-body">
+                                        <form class="form-horizontal form-material" #f="ngForm" ngNativeValidate (submit)="updateUser(f.value)">
+                                            <div class="form-group">
+                                                <label class="col-md-12">Nombres</label>
+                                                <div class="col-md-12">
+                                                    <input type="text" [ngModel]="user.name" name="name"  placeholder="Nombres" class="form-control form-control-line" required>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-md-12">Apellidos</label>
+                                                <div class="col-md-12">
+                                                    <input type="text" [ngModel]="user.lastname" name="lastname" placeholder="Apellidos" class="form-control form-control-line" required> 
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-md-12">Nueva Contraseña</label>
+                                                <div class="col-md-12">
+                                                    <input type="password" [ngModel]="user.newPassword" name="newPassword" class="form-control form-control-line">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-md-12">Contraseña Actual</label>
+                                                <div class="col-md-12">
+                                                    <input type="password" [ngModel]="user.password" name="password" class="form-control form-control-line">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-md-12">Número de Móvil</label>
+                                                <div class="col-md-12">
+                                                    <input type="text" [ngModel]="user.phoneNumber" name="phoneNumber" placeholder="+99 999 999 999" class="form-control form-control-line" required>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-md-12">Dirección</label>
+                                                <div class="col-md-12">
+                                                    <input type="text" [ngModel]="user.address" name="address" placeholder="Dirección" class="form-control form-control-line" required>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-12">Seleccionar País</label>
+                                                <div class="col-sm-12">
+                                                    <select class="form-control form-control-line" [ngModel]="user.country" name="country" required>
+                                                        <option value="Perú">Perú</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-12">Seleccionar Ciudad</label>
+                                                <div class="col-sm-12">
+                                                    <select class="form-control form-control-line" [ngModel]="user.city" name="city" required>
+                                                        <option value="Madre de Dios">Madre de Dios</option>
+                                                        <option value="Cusco">Cusco</option>
+                                                        <option value="Lima">Lima</option>
+                                                        <option value="Tacna">Tacna</option>
+                                                        <option value="Arequipa">Arequipa</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-md-12">Código Postal</label>
+                                                <div class="col-md-12">
+                                                    <input type="text" [ngModel]="user.postalCode" name="postalCode" placeholder="Código Postal" class="form-control form-control-line" required> 
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-md-12">Foto de Perfil</label>
+                                                <div class="col-md-12" >
+                                                    <img *ngIf="!imagenTemp" [src]="user.photoURL" alt="" class="w150">
+                                                    <img *ngIf="imagenTemp" [src]="imagenTemp" alt="" class="w150">
+                                                    <br>  
+                                                    <input (change)="selectImage($event.target.files[0])" type="file">
+                                                    <br>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="col-sm-12">
+                                                    <button class="btn btn-success" type="submit">Actualizar perfil</button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Column -->
+                </div>
+                <!-- Row -->
+                <!-- ============================================================== -->
+                <!-- End PAge Content -->
+                <!-- ============================================================== -->

@@ -1,0 +1,66 @@
+<!-- column -->
+<div class="col-12">
+  <div class="card">
+      <div class="card-body">
+          <h4 class="card-title">Cuentas </h4>
+          <div class="table-responsive">
+              <table class="table">
+                  <thead>
+                      <tr>
+                          <th>DNI</th>
+                          <th>Nombres y Apellidos</th>
+                          <th>Fecha</th>
+                          <th>Monto</th>
+                          <th>Puntos</th>
+                          <th>Por</th>
+                          <th>Afiliado</th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                      <tr *ngFor="let account of accounts">
+                          <td>{{_userService.user.DNI}}</td>
+                          <td>{{_userService.user.name}} {{_userService.user.lastname}}</td>
+                          <td><span class="text-muted"><i class="fa fa-clock-o"></i> {{account.date._seconds  * 1000 | date:'MM-dd-yyyy'}}</span> </td>
+                          <td>${{account.money}}</td>
+                          <td>{{account.points}} puntos </td>
+                          <td><div class="label label-table label-success">{{account.by}}</div></td>
+                          <td>{{account.sponsored}}</td>
+                      </tr>
+                  </tbody>
+              </table>
+          </div>
+      </div>
+  </div>
+</div>
+<div class="col-12">
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">Cuenta del Mes</h4>
+            <div class="table-responsive">
+                <table class="table color-table muted-table">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Mes</th>
+                            <th>Nombres y Apellidos</th>
+                            <th>Fecha de Apertura</th> 
+                            <th>Monto Total</th>
+                            <th>Fecha de Cierre</th> 
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr  *ngFor="let payment of payments;  let i = index">
+                            <td>{{i+1}}</td>
+                            <td><div class="label label-table label-success">{{payment.month}}</div></td>
+                            <td>{{_userService.user.name}} {{_userService.user.lastname}}</td> 
+                            <td>{{payment.openingdate._seconds  * 1000 | date:'MM-dd-yyyy'}}</td>
+                            <td>${{payment.payment}}</td>
+                            <td>{{payment.closingdate._seconds  * 1000 | date:'MM-dd-yyyy'}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- column -->
